@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebEngage — Sign up or log in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="screen">
+
+  <!-- LEFT: brand panel -->
+  <aside class="brand-panel">
+    <div class="brand-mark">
+      <span class="brand-dot"></span>
+      <span class="brand-name">WebEngage</span>
+    </div>
+
+    <div class="brand-copy">
+      <h1>Every visitor<br>leaves a pulse.<br><em>Catch it.</em></h1>
+      <p>Track engagement the moment it happens, and reach the right person before the moment's gone.</p>
+    </div>
+
+    <!-- Signature element: live "engagement pulse" line -->
+    <div class="pulse-wrap" aria-hidden="true">
+      <svg class="pulse-svg" viewBox="0 0 600 140" preserveAspectRatio="none">
+        <line class="pulse-baseline" x1="0" y1="100" x2="600" y2="100"></line>
+        <path class="pulse-line" d="M0,100 L120,100 L145,40 L170,140 L195,70 L220,100 L340,100 L365,20 L390,150 L415,100 L600,100" />
+        <circle class="pulse-dot" r="5" cy="100">
+          <animateMotion dur="3.4s" repeatCount="indefinite"
+            path="M0,100 L120,100 L145,40 L170,140 L195,70 L220,100 L340,100 L365,20 L390,150 L415,100 L600,100" />
+        </circle>
+      </svg>
+      <div class="pulse-stats">
+        <div><strong id="statVisitors">0</strong><span>active right now</span></div>
+        <div><strong id="statEvents">0</strong><span>events / min</span></div>
+      </div>
+    </div>
+
+    <ul class="brand-features">
+      <li>Real-time behavior tracking</li>
+      <li>Lifecycle campaigns that trigger themselves</li>
+      <li>One inbox for every channel</li>
+    </ul>
+  </aside>
+
+  <!-- RIGHT: auth panel -->
+  <main class="auth-panel">
+    <div class="auth-card">
+
+      <div class="tabs" role="tablist" aria-label="Choose account action">
+        <button class="tab is-active" id="tabLogin" role="tab" aria-selected="true" aria-controls="loginForm">Log in</button>
+        <button class="tab" id="tabSignup" role="tab" aria-selected="false" aria-controls="signupForm">Sign up</button>
+        <span class="tab-indicator" id="tabIndicator"></span>
+      </div>
+
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+
+      <!-- LOGIN FORM -->
+      <form class="auth-form is-active" id="loginForm" novalidate>
+        <div class="field">
+          <label for="loginEmail">Work email</label>
+          <input type="email" id="loginEmail" name="email" placeholder="you@company.com" autocomplete="email" required>
+          <span class="field-error" id="loginEmailError"></span>
+        </div>
+
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <div class="password-row">
+            <input type="password" id="loginPassword" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+            <button type="button" class="toggle-visibility" data-target="loginPassword" aria-label="Show password">Show</button>
+          </div>
+          <span class="field-error" id="loginPasswordError"></span>
+        </div>
+
+        <div class="field-row">
+          <label class="checkbox">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="link-muted" id="forgotLink">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-primary">Log in</button>
+
+        <p class="switch-line">New to WebEngage? <button type="button" class="link-strong" id="goToSignup">Create an account</button></p>
+      </form>
+
+      <!-- SIGNUP FORM -->
+      <form class="auth-form" id="signupForm" novalidate>
+        <div class="field">
+          <label for="signupName">Full name</label>
+          <input type="text" id="signupName" name="name" placeholder="Jordan Rivera" autocomplete="name" required>
+          <span class="field-error" id="signupNameError"></span>
+        </div>
+
+        <div class="field">
+          <label for="signupCompany">Company <span class="optional">(optional)</span></label>
+          <input type="text" id="signupCompany" name="company" placeholder="Acme Inc." autocomplete="organization">
+        </div>
+
+        <div class="field">
+          <label for="signupEmail">Work email</label>
+          <input type="email" id="signupEmail" name="email" placeholder="you@company.com" autocomplete="email" required>
+          <span class="field-error" id="signupEmailError"></span>
+        </div>
+
+        <div class="field">
+          <label for="signupPassword">Password</label>
+          <div class="password-row">
+            <input type="password" id="signupPassword" name="password" placeholder="At least 8 characters" autocomplete="new-password" required>
+            <button type="button" class="toggle-visibility" data-target="signupPassword" aria-label="Show password">Show</button>
+          </div>
+          <div class="strength-meter" aria-hidden="true">
+            <span id="strengthBar"></span>
+          </div>
+          <span class="field-error" id="signupPasswordError"></span>
+        </div>
+
+        <div class="field">
+          <label for="signupConfirm">Confirm password</label>
+          <input type="password" id="signupConfirm" name="confirm" placeholder="Re-enter your password" autocomplete="new-password" required>
+          <span class="field-error" id="signupConfirmError"></span>
+        </div>
+
+        <label class="checkbox terms">
+          <input type="checkbox" id="agreeTerms" required>
+          <span>I agree to the Terms of Service and Privacy Policy</span>
+        </label>
+        <span class="field-error" id="agreeTermsError"></span>
+
+        <button type="submit" class="btn-primary">Create account</button>
+
+        <p class="switch-line">Already have an account? <button type="button" class="link-strong" id="goToLogin">Log in</button></p>
+      </form>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
